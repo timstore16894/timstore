@@ -16,13 +16,13 @@ const PRODUCTS = [
     badgeColor: "purple",
     rating: 4.9,
     reviewsCount: 38,
-    image: "assets/helmet-mount.svg",
-    shortDesc: "Надійне регульоване кріплення на підборіддя шолома для зйомки POV контенту в дорозі.",
+    image: "assets/helmet-mount.jpg",
+    shortDesc: "Повний комплект кріплення на підборіддя шолома з силіконовим тримачем для POV зйомки.",
     features: [
       "Підходить для 99% мотошоломів (інтеграл, крос, модуляр)",
-      "Посилений силіконовий захист проти подряпин та ковзання",
-      "Регулювання кута нахилу на 180 градусів",
-      "Універсальний затискач для телефонів шириною до 90 мм"
+      "Посилений силіконовий фіксатор «павук» проти випадіння",
+      "Регулювання кута нахилу та надійні міцні стропи",
+      "Універсальний затискач для телефонів будь-якої діагоналі"
     ],
     inStock: true
   },
@@ -37,12 +37,12 @@ const PRODUCTS = [
     badgeColor: "purple",
     rating: 5.0,
     reviewsCount: 52,
-    image: "assets/powerbank.svg",
-    shortDesc: "Швидкісна бездротова зарядка з потужними магнітами. Завжди на зв'язку в дорозі та подорожах.",
+    image: "assets/powerbank.jpg",
+    shortDesc: "Швидкісна бездротова магнітна зарядка. Ідеально для авто, подорожей та щоденного використання.",
     features: [
       "Потужний магнітний фіксатор MagSafe",
-      "Швидка зарядка Power Delivery до 22.5W",
-      "Цифровий LED-дисплей точного відсотка заряду",
+      "Швидка бездротова та дротова зарядка Fast Charge",
+      "Компактний ергономічний корпус із захистом від подряпин",
       "Захист від перегріву, короткого замикання та стрибків напруги"
     ],
     inStock: true
@@ -61,10 +61,10 @@ const PRODUCTS = [
     image: "assets/kst-stickers.svg",
     shortDesc: "Преміальні вінілові стікери KST з ламінацією. Стійкі до води, мийки високого тиску та сонця.",
     features: [
-      "100% водостійкий німецький вініл Oracal",
+      "100% водостійкий вініл підвищеної міцності",
       "УФ-ламінація, кольори не вигорають на сонці",
       "Не залишають слідів клею при знятті",
-      "Ідеально для шолома, байка, авто, ноутбука чи кейса"
+      "Ідеально для шолома, мотоцикла, авто, смартфона або кейса"
     ],
     inStock: true
   },
@@ -79,12 +79,12 @@ const PRODUCTS = [
     badgeColor: "purple",
     rating: 4.9,
     reviewsCount: 29,
-    image: "assets/chest-mount.svg",
-    shortDesc: "Еластичний нагрудний ремінь для зйомки найдинамічніших кадрів покатушок від першої особи.",
+    image: "assets/chest-mount.jpg",
+    shortDesc: "Еластичний регульований нагрудний ремінь для зйомки найдинамічніших кадрів покатушок від першої особи.",
     features: [
-      "Дихаючі та еластичні ремені з легким регулюванням розміру",
+      "Дихаючі та еластичні ремені з легким налаштуванням розміру",
       "J-Hook кронштейн для швидкої установки потрібного кута",
-      "Горизонтальне та вертикальне положення смартфона",
+      "Горизонтальне та вертикальне надійне положення смартфона",
       "Сумісний зі смартфонами та екшн-камерами (GoPro, SJCAM, DJI)"
     ],
     inStock: true
@@ -100,13 +100,13 @@ const PRODUCTS = [
     badgeColor: "purple",
     rating: 4.9,
     reviewsCount: 67,
-    image: "assets/strobes.svg",
-    shortDesc: "Яскраві багаторежимні міні-стробоскопи для мотоцикла, скутера, дрона або шолома.",
+    image: "assets/strobes.jpg",
+    shortDesc: "Яскраві багаторежимні міні-стробоскопи з пультом ДК для мотоцикла, шолома, авто чи дрона.",
     features: [
       "7 кольорів підсвічування та понад 20 режимів мерехтіння",
+      "Зручний бездротовий пульт керування режимами в комплекті",
       "Вбудований акумулятор із зарядкою Type-C/USB",
-      "Вологозахист стандарту IP65 для будь-якої погоди",
-      "Простий монтаж на липучку Velcro або гумові фіксатори"
+      "Вологозахист стандарту IP65 для будь-якої погоди"
     ],
     inStock: true
   }
@@ -215,12 +215,12 @@ function renderProducts() {
     <div class="product-card glass-panel rounded-2xl overflow-hidden border border-purple-900/30 hover:border-purple-500/50 transition-all flex flex-col justify-between group">
       <div>
         <!-- Image Container -->
-        <div class="relative bg-zinc-950/80 p-6 flex items-center justify-center overflow-hidden h-64 cursor-pointer" onclick="openProductModal(${product.id})">
-          <span class="absolute top-3 left-3 px-3 py-1 text-xs font-bold rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 backdrop-blur-md">
+        <div class="relative bg-zinc-950 p-4 flex items-center justify-center overflow-hidden h-64 cursor-pointer" onclick="openProductModal(${product.id})">
+          <span class="absolute top-3 left-3 px-3 py-1 text-xs font-bold rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 backdrop-blur-md z-10">
             ${product.badge}
           </span>
-          <img src="${product.image}" alt="${product.title}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">
-          <button onclick="event.stopPropagation(); openProductModal(${product.id})" class="absolute bottom-3 right-3 bg-zinc-900/90 text-purple-300 hover:text-white p-2 rounded-xl border border-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity text-xs flex items-center gap-1 backdrop-blur-md">
+          <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-300">
+          <button onclick="event.stopPropagation(); openProductModal(${product.id})" class="absolute bottom-3 right-3 bg-zinc-900/90 text-purple-300 hover:text-white p-2 rounded-xl border border-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity text-xs flex items-center gap-1 backdrop-blur-md z-10">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
             Деталі
           </button>
@@ -337,7 +337,7 @@ function updateCartUI() {
 
       cartItemsContainer.innerHTML = cart.map(item => `
         <div class="flex items-center gap-3 p-3 rounded-xl bg-zinc-950/60 border border-purple-900/30">
-          <img src="${item.image}" alt="${item.title}" class="w-16 h-16 object-contain rounded-lg bg-zinc-900 p-1 border border-zinc-800">
+          <img src="${item.image}" alt="${item.title}" class="w-16 h-16 object-cover rounded-lg bg-zinc-900 border border-zinc-800">
           <div class="flex-1 min-w-0">
             <h4 class="text-sm font-semibold text-white truncate">${item.title}</h4>
             <p class="text-xs text-purple-400 font-bold mt-0.5">${item.price} ₴</p>
@@ -387,11 +387,11 @@ function openProductModal(productId) {
 
   content.innerHTML = `
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-      <div class="bg-zinc-950 rounded-2xl p-6 flex items-center justify-center border border-purple-900/40 relative">
-        <span class="absolute top-4 left-4 px-3 py-1 text-xs font-bold rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300">
+      <div class="bg-zinc-950 rounded-2xl p-3 flex items-center justify-center border border-purple-900/40 relative overflow-hidden">
+        <span class="absolute top-4 left-4 px-3 py-1 text-xs font-bold rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 z-10">
           ${product.badge}
         </span>
-        <img src="${product.image}" alt="${product.title}" class="w-full max-h-72 object-contain">
+        <img src="${product.image}" alt="${product.title}" class="w-full max-h-80 object-cover rounded-xl">
       </div>
 
       <div class="flex flex-col justify-between">
@@ -561,7 +561,6 @@ async function handleCheckoutSubmit(e) {
   const submitBtn = form.querySelector('button[type="submit"]');
   const originalBtnText = submitBtn.innerHTML;
 
-  // Show loading
   submitBtn.disabled = true;
   submitBtn.innerHTML = `
     <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
