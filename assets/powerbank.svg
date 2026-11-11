@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <radialGradient id="purpleRing" cx="50%" cy="50%" r="50%">
+      <stop offset="60%" stop-color="#8b5cf6" stop-opacity="0" />
+      <stop offset="90%" stop-color="#a855f7" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1136" />
+      <stop offset="100%" stop-color="#0a0612" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#0d0918" />
+  
+  <!-- Powerbank body -->
+  <rect x="120" y="80" width="160" height="240" rx="28" fill="url(#bodyGrad)" stroke="#8b5cf6" stroke-width="2.5" />
+  
+  <!-- MagSafe / Wireless Qi Circle -->
+  <circle cx="200" cy="190" r="54" fill="none" stroke="#a855f7" stroke-width="4" stroke-dasharray="8 6" />
+  <circle cx="200" cy="190" r="28" fill="#130b24" stroke="#c084fc" stroke-width="2" />
+  <!-- Lightning icon -->
+  <polygon points="202,175 190,192 199,192 196,206 208,188 200,188" fill="#c084fc" />
+
+  <!-- LED Display bar -->
+  <rect x="155" y="260" width="90" height="22" rx="6" fill="#06030d" stroke="#6366f1" stroke-width="1.5" />
+  <text x="200" y="275" fill="#38bdf8" font-family="'Courier New', monospace" font-size="12" font-weight="bold" text-anchor="middle">100% ⚡ 22.5W</text>
+  
+  <!-- Top ports -->
+  <rect x="175" y="76" width="22" height="6" rx="2" fill="#3b0764" stroke="#a855f7" stroke-width="1" />
+  <rect x="205" y="76" width="22" height="6" rx="2" fill="#3b0764" stroke="#a855f7" stroke-width="1" />
+</svg>

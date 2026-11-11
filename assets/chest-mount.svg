@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <rect width="400" height="400" fill="#0d0918" />
+  
+  <!-- Harness Straps -->
+  <path d="M120 40 L160 170 M280 40 L240 170" stroke="#2e1065" stroke-width="26" stroke-linecap="round" />
+  <path d="M120 40 L160 170 M280 40 L240 170" stroke="#7e22ce" stroke-width="12" stroke-linecap="round" />
+  
+  <path d="M40 220 L360 220" stroke="#2e1065" stroke-width="28" stroke-linecap="round" />
+  <path d="M40 220 L360 220" stroke="#7e22ce" stroke-width="12" stroke-linecap="round" />
+
+  <!-- Center Chest Plate -->
+  <rect x="150" y="160" width="100" height="110" rx="16" fill="#170f2c" stroke="#a855f7" stroke-width="3" />
+  
+  <!-- J-Hook Mount & Phone Adapter -->
+  <polygon points="180,180 220,180 215,220 185,220" fill="#3b0764" stroke="#c084fc" stroke-width="2" />
+  
+  <!-- Vertical smartphone clamp with phone -->
+  <rect x="165" y="115" width="70" height="120" rx="12" fill="#0a0514" stroke="#a855f7" stroke-width="3" />
+  <circle cx="200" cy="130" r="4" fill="#a855f7" />
+  <!-- Screen grid / POV line -->
+  <rect x="172" y="142" width="56" height="75" rx="4" fill="#190e33" />
+  <path d="M185 175 L215 175 M200 160 L200 190" stroke="#c084fc" stroke-width="2" />
+  <text x="200" y="206" fill="#a855f7" font-size="8" font-family="sans-serif" font-weight="bold" text-anchor="middle">CHEST POV</text>
+</svg>

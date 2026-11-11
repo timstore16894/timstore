@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="stickerGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#0d0918" />
+  
+  <!-- Sticker 1: Diagonal KST Badge -->
+  <g transform="rotate(-8 180 160)">
+    <rect x="70" y="100" width="220" height="90" rx="16" fill="#130b24" stroke="#a855f7" stroke-width="4" stroke-dasharray="6 4" />
+    <rect x="80" y="110" width="200" height="70" rx="10" fill="#000000" />
+    <text x="180" y="158" font-family="'Impact', 'Arial Black', sans-serif" font-size="44" fill="#ffffff" text-anchor="middle" letter-spacing="4">
+      K<tspan fill="#c084fc">S</tspan>T
+    </text>
+    <text x="180" y="174" font-family="sans-serif" font-weight="900" font-size="9" fill="#a855f7" text-anchor="middle" letter-spacing="3">RACING CREW</text>
+  </g>
+  
+  <!-- Sticker 2: Round emblem -->
+  <g transform="translate(230, 210)">
+    <circle cx="50" cy="50" r="52" fill="#0f091f" stroke="url(#stickerGlow)" stroke-width="4" />
+    <polygon points="50,15 62,40 90,42 68,60 75,88 50,72 25,88 32,60 10,42 38,40" fill="#a855f7" opacity="0.25" />
+    <text x="50" y="56" font-family="'Impact', sans-serif" font-size="22" fill="#ffffff" text-anchor="middle">KST</text>
+  </g>
+
+  <!-- Sticker 3: Speed Flame / Arrow -->
+  <g transform="translate(60, 240)">
+    <polygon points="20,40 140,20 180,50 120,60 20,40" fill="#6d28d9" stroke="#c084fc" stroke-width="2" />
+    <text x="90" y="47" font-family="sans-serif" font-weight="900" font-size="14" fill="#ffffff">#TIMSTORE</text>
+  </g>
+</svg>

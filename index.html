@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="uk" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>timstore — Мото гаджети, кріплення та аксесуари</title>
+  <meta name="description" content="Інтернет-магазин timstore. Тримачі для телефону на шолом та груди, павербанки з бездротовою зарядкою, наліпки KST, міні стробоскопи.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              800: '#6b21a8',
+              900: '#581c87',
+              950: '#150928'
+            },
+            dark: {
+              base: '#09060f',
+              card: '#130d22',
+              cardHover: '#1c1332',
+              border: '#2e194d'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#09060f] text-slate-100 min-h-screen relative antialiased bg-ambient-grid selection:bg-purple-500 selection:text-white">
+
+  <!-- Ambient glow background top -->
+  <div class="ambient-glow-top"></div>
+
+  <!-- Announcement Bar -->
+  <div class="bg-gradient-to-r from-purple-950 via-purple-900 to-indigo-950 text-purple-200 text-xs py-2 px-4 text-center font-medium border-b border-purple-800/40 relative z-20">
+    <span>⚡ Відправка замовлень в день оформлення Новою Поштою по всій Україні! Замовлення в Telegram: <a href="https://t.me/timstore16" target="_blank" class="underline font-bold text-white hover:text-purple-300">@timstore16</a></span>
+  </div>
+
+  <!-- Sticky Header / Navbar -->
+  <header class="sticky top-0 z-40 bg-[#09060f]/85 backdrop-blur-xl border-b border-purple-900/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="relative">
+          <img src="assets/logo.jpg" alt="timstore" class="h-12 w-12 rounded-full object-cover border-2 border-purple-500 shadow-lg shadow-purple-600/50 group-hover:scale-105 group-hover:border-purple-400 transition-all">
+          <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-black rounded-full"></span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-black tracking-wider text-white group-hover:text-purple-300 transition-colors flex items-center gap-1">
+            TIM<span class="text-purple-400">STORE</span>
+          </span>
+          <span class="text-[10px] text-zinc-400 font-semibold tracking-widest uppercase -mt-1">MOTO &bull; GEAR &bull; STYLE</span>
+        </div>
+      </a>
+
+      <!-- Search bar (Desktop) -->
+      <div class="hidden md:flex flex-1 max-w-md mx-6">
+        <div class="relative w-full">
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="Шукати: тримач, шолом, павербанк, KST..." 
+            class="w-full bg-zinc-950/90 border border-purple-900/40 rounded-full py-2 pl-10 pr-4 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
+          >
+          <svg class="w-4 h-4 text-zinc-500 absolute left-3.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Navigation & Actions -->
+      <div class="flex items-center gap-4">
+        <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold text-zinc-300">
+          <a href="#catalog" class="hover:text-purple-400 transition-colors">Каталог</a>
+          <a href="#advantages" class="hover:text-purple-400 transition-colors">Переваги</a>
+          <a href="#delivery" class="hover:text-purple-400 transition-colors">Доставка</a>
+          <a href="#faq" class="hover:text-purple-400 transition-colors">Часті питання</a>
+        </nav>
+
+        <!-- Cart Button -->
+        <button id="open-cart-btn" class="relative flex items-center gap-2.5 px-4 py-2 rounded-xl bg-purple-950/60 border border-purple-500/40 hover:border-purple-400 text-purple-200 transition-all group">
+          <svg class="w-5 h-5 text-purple-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          <span class="text-xs font-bold hidden sm:inline">Кошик</span>
+          <span id="cart-count" class="w-5 h-5 rounded-full bg-purple-600 text-white text-[10px] font-black flex items-center justify-center -mr-1 shadow-md shadow-purple-600/50">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-10 pb-20 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left text content -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full badge-neon text-xs font-bold tracking-wide">
+            <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+            ОРИГІНАЛЬНИЙ СТАЙЛІНГ &bull; ЕКШН КРІПЛЕННЯ
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+            ТВІЙ РАКУРС. <br>
+            <span class="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-indigo-400 bg-clip-text text-transparent neon-text-glow">
+              ТВІЙ ДРАЙВ. TIMSTORE.
+            </span>
+          </h1>
+
+          <p class="text-zinc-400 text-sm sm:text-base max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            Надійні тримачі для зйомки POV від першої особи на шоломі (230 ₴) та грудях (299 ₴), швидкісні бездротові павербанки, водостійкі стікери KST (30 ₴) та міні стробоскопи (240 ₴).
+          </p>
+
+          <!-- Buttons -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#catalog" class="px-6 py-3.5 rounded-xl neon-glow-btn text-white text-sm font-bold flex items-center gap-2">
+              <span>Дивитися каталог</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </a>
+            <a href="https://t.me/timstore16" target="_blank" class="px-6 py-3.5 rounded-xl glass-panel text-zinc-300 hover:text-white hover:border-purple-500/50 text-sm font-semibold transition-all flex items-center gap-2">
+              <span>Telegram: @timstore16</span>
+            </a>
+          </div>
+
+          <!-- Quick trust badges -->
+          <div class="grid grid-cols-3 gap-3 pt-6 border-t border-purple-900/30 max-w-lg mx-auto lg:mx-0">
+            <div class="text-center lg:text-left">
+              <p class="text-lg font-black text-purple-300">100%</p>
+              <p class="text-[11px] text-zinc-500 uppercase tracking-wider">Сумісність</p>
+            </div>
+            <div class="text-center lg:text-left">
+              <p class="text-lg font-black text-purple-300">24 год</p>
+              <p class="text-[11px] text-zinc-500 uppercase tracking-wider">Відправка</p>
+            </div>
+            <div class="text-center lg:text-left">
+              <p class="text-lg font-black text-purple-300">4.9 ★</p>
+              <p class="text-[11px] text-zinc-500 uppercase tracking-wider">Відгуки райдерів</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Visual Box -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-md glass-panel rounded-3xl p-6 border-purple-500/30 shadow-2xl shadow-purple-950/80">
+            <div class="absolute -top-4 -right-4 px-3 py-1 rounded-full bg-purple-600 text-[11px] font-black uppercase tracking-wider text-white shadow-lg shadow-purple-600/50">
+              ХІТ СЕЗОНУ
+            </div>
+            
+            <div class="relative h-72 rounded-2xl bg-zinc-950 flex items-center justify-center overflow-hidden border border-purple-900/40">
+              <img src="assets/helmet-mount.svg" alt="Helmet Mount timstore" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-all">
+            </div>
+
+            <div class="mt-5 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-purple-400 font-bold uppercase tracking-wider">Кріплення на шолом</span>
+                <span class="text-xs text-emerald-400 font-medium">● Є на складі</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Тримач для телефону на шолом</h3>
+              <div class="flex items-center justify-between pt-1">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-2xl font-black text-purple-300">230 ₴</span>
+                  <span class="text-xs text-zinc-500 line-through">320 ₴</span>
+                </div>
+                <button onclick="addToCart(1)" class="px-4 py-2 rounded-xl neon-glow-btn text-white text-xs font-bold">
+                  Замовити зараз
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Catalog Section -->
+  <section id="catalog" class="py-16 border-t border-purple-900/30 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div>
+          <div class="flex items-center gap-2 text-purple-400 text-xs font-bold uppercase tracking-wider mb-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+            Асортимент timstore
+          </div>
+          <h2 class="text-3xl font-black text-white">Каталог товарів</h2>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button data-category="all" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-purple-600 text-white shadow-lg shadow-purple-900/50">
+            Всі товари
+          </button>
+          <button data-category="mounts" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-zinc-900 text-zinc-400 hover:text-white">
+            Кріплення для телефону
+          </button>
+          <button data-category="gadgets" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-zinc-900 text-zinc-400 hover:text-white">
+            Павербанки
+          </button>
+          <button data-category="stickers" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-zinc-900 text-zinc-400 hover:text-white">
+            Наліпки KST
+          </button>
+          <button data-category="lights" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-zinc-900 text-zinc-400 hover:text-white">
+            Стробоскопи
+          </button>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Advantages / Features Section -->
+  <section id="advantages" class="py-20 bg-zinc-950/60 border-t border-purple-900/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-purple-400 text-xs font-bold uppercase tracking-widest">Переваги сервісу</span>
+        <h2 class="text-3xl font-black text-white mt-2">Чому обирають timstore</h2>
+        <p class="text-zinc-400 text-sm mt-3">Ми дбаємо про якість кожного аксесуару, щоб ви отримували максимум задоволення від поїздок та зйомок.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="glass-panel p-6 rounded-2xl border-purple-900/30 hover:border-purple-500/50 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-purple-950/80 border border-purple-500/40 flex items-center justify-center text-purple-300 mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2">Швидка відправка</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">Замовлення, оформлені до 17:00, відправляються в той самий день Новою Поштою.</p>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl border-purple-900/30 hover:border-purple-500/50 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-purple-950/80 border border-purple-500/40 flex items-center justify-center text-purple-300 mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2">Перевірка якості</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">Всі кріплення, павербанки та стробоскопи тестуються перед відправкою клієнту.</p>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl border-purple-900/30 hover:border-purple-500/50 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-purple-950/80 border border-purple-500/40 flex items-center justify-center text-purple-300 mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2">Оплата при отриманні</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">Можливість оглянути та перевірити посилку у відділенні перед оплатою.</p>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl border-purple-900/30 hover:border-purple-500/50 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-purple-950/80 border border-purple-500/40 flex items-center justify-center text-purple-300 mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2">Підтримка райдерів</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">Допоможемо підібрати кріплення під конкретну модель шолома або смартфона.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery & Payment Section -->
+  <section id="delivery" class="py-16 border-t border-purple-900/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="glass-panel rounded-3xl p-8 sm:p-12 border-purple-800/40 relative overflow-hidden">
+        
+        <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div>
+            <span class="text-purple-400 text-xs font-bold uppercase tracking-wider">Умови замовлення</span>
+            <h2 class="text-2xl sm:text-3xl font-black text-white mt-2 mb-4">Доставка та способи оплати</h2>
+            
+            <div class="space-y-4 text-xs sm:text-sm text-zinc-300">
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center text-purple-300 shrink-0 mt-0.5">✓</div>
+                <div>
+                  <strong class="text-white block">Нова Пошта (відділення або поштомат):</strong>
+                  Доставка 1-2 дні по всій території України.
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center text-purple-300 shrink-0 mt-0.5">✓</div>
+                <div>
+                  <strong class="text-white block">Гнучка оплата:</strong>
+                  Накладений платіж при отриманні або швидка передоплата на карту/рахунок.
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center text-purple-300 shrink-0 mt-0.5">✓</div>
+                <div>
+                  <strong class="text-white block">Гарантія та повернення:</strong>
+                  14 днів на обмін або повернення товару.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick contact banner card -->
+          <div class="bg-zinc-950/80 rounded-2xl p-6 border border-purple-900/40 text-center">
+            <h3 class="text-lg font-bold text-white mb-2">Зв'язок із менеджером timstore</h3>
+            <p class="text-xs text-zinc-400 mb-6">Пишіть нам в Telegram або телефонуйте для швидкої консультації!</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a href="https://t.me/timstore16" target="_blank" rel="noopener" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl neon-glow-btn text-white text-xs font-bold">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                Telegram: @timstore16
+              </a>
+              <a href="tel:+380938530629" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl glass-panel text-purple-300 hover:text-white hover:border-purple-500/50 text-xs font-bold">
+                📞 +380938530629
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-16 border-t border-purple-900/30">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <span class="text-purple-400 text-xs font-bold uppercase tracking-widest">Відповіді на запитання</span>
+        <h2 class="text-3xl font-black text-white mt-1">Часті питання</h2>
+      </div>
+
+      <div class="space-y-4">
+        <details class="glass-panel rounded-xl p-5 border-purple-900/30 group">
+          <summary class="font-bold text-sm text-white cursor-pointer list-none flex items-center justify-between">
+            <span>Чи підходить кріплення на шолом для будь-якої моделі?</span>
+            <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-xs text-zinc-400 mt-3 leading-relaxed">
+            Так, конструкція кріплення на підборіддя оснащена еластичними міцними ременями та силіконовою формою, що повторює форму 99% шоломів: інтегралів, кросових та модулярів.
+          </p>
+        </details>
+
+        <details class="glass-panel rounded-xl p-5 border-purple-900/30 group">
+          <summary class="font-bold text-sm text-white cursor-pointer list-none flex items-center justify-between">
+            <span>Чи бояться наліпки KST дощу та мийки високого тиску?</span>
+            <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-xs text-zinc-400 mt-3 leading-relaxed">
+            Ні, наші стікери виготовлені зі спеціального вінілу підвищеної щільності з додатковою захисною ламінацією. Вони не вигорають на сонці і витримують мийку Karcher.
+          </p>
+        </details>
+
+        <details class="glass-panel rounded-xl p-5 border-purple-900/30 group">
+          <summary class="font-bold text-sm text-white cursor-pointer list-none flex items-center justify-between">
+            <span>Як заряджаються міні-стробоскопи і скільки тримає батарея?</span>
+            <span class="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-xs text-zinc-400 mt-3 leading-relaxed">
+            Стробоскопи мають вбудований літієвий акумулятор і заряджаються через Type-C або micro-USB кабель (в комплекті). Повного заряду вистачає на тривалий час роботи.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black/95 border-t border-purple-900/40 py-12 text-zinc-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <img src="assets/logo.jpg" alt="timstore logo" class="h-12 w-12 rounded-full object-cover border-2 border-purple-500 shadow-lg shadow-purple-600/40">
+          <span class="text-lg font-black text-white">TIM<span class="text-purple-400">STORE</span></span>
+        </div>
+        <p class="text-zinc-500">
+          Стильні та надійні гаджети для твоїх поїздок, мото-влогів та щоденного драйву.
+        </p>
+        <p class="text-[11px] text-zinc-600">© 2026 timstore. Всі права захищені.</p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Каталог товарів</h4>
+        <ul class="space-y-2">
+          <li><a href="#catalog" class="hover:text-purple-300 transition-colors">Кріплення на шолом (230 ₴)</a></li>
+          <li><a href="#catalog" class="hover:text-purple-300 transition-colors">Тримач на груди (299 ₴)</a></li>
+          <li><a href="#catalog" class="hover:text-purple-300 transition-colors">Міні стробоскопи (240 ₴)</a></li>
+          <li><a href="#catalog" class="hover:text-purple-300 transition-colors">Наліпки KST (30 ₴)</a></li>
+          <li><a href="#catalog" class="hover:text-purple-300 transition-colors">Павербанки MagSafe</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Клієнтам</h4>
+        <ul class="space-y-2">
+          <li><a href="#delivery" class="hover:text-purple-300 transition-colors">Оплата і доставка</a></li>
+          <li><a href="#faq" class="hover:text-purple-300 transition-colors">Повернення та гарантія</a></li>
+          <li><a href="#advantages" class="hover:text-purple-300 transition-colors">Про наш сервіс</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Контакти timstore</h4>
+        <div class="space-y-2.5">
+          <p>
+            <span class="text-zinc-500 block text-[10px] uppercase">Телефон:</span>
+            <a href="tel:+380938530629" class="text-white font-bold text-sm hover:text-purple-400 transition-colors">+380938530629</a>
+          </p>
+          <p>
+            <span class="text-zinc-500 block text-[10px] uppercase">Telegram:</span>
+            <a href="https://t.me/timstore16" target="_blank" class="text-purple-400 font-bold hover:underline">@timstore16</a>
+          </p>
+          <p>
+            <span class="text-zinc-500 block text-[10px] uppercase">Instagram:</span>
+            <a href="https://instagram.com/timstore_16" target="_blank" class="text-fuchsia-400 font-bold hover:underline">@timstore_16</a>
+          </p>
+          <p class="text-zinc-500 text-[11px]">Графік: Пн-Нд з 09:00 до 21:00</p>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Slide-out Cart Drawer -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+    <!-- Backdrop -->
+    <div id="cart-backdrop" class="drawer-backdrop fixed inset-0 bg-black/80 backdrop-blur-sm"></div>
+    
+    <!-- Drawer panel -->
+    <div id="cart-panel" class="drawer-panel fixed top-0 right-0 bottom-0 w-full max-w-md bg-[#0d0918] border-l border-purple-900/50 shadow-2xl flex flex-col justify-between z-10">
+      
+      <!-- Drawer Header -->
+      <div class="p-6 border-b border-purple-900/30 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-purple-950 border border-purple-500/40 flex items-center justify-center text-purple-300">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          </div>
+          <h3 class="text-lg font-black text-white">Кошик замовлень</h3>
+        </div>
+        <button id="close-cart-btn" class="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-900">
+          ✕
+        </button>
+      </div>
+
+      <!-- Drawer Content -->
+      <div class="flex-1 overflow-y-auto p-6 space-y-3">
+        <!-- Empty Cart -->
+        <div id="cart-empty" class="text-center py-20 text-zinc-500">
+          <svg class="w-16 h-16 mx-auto mb-3 text-purple-900/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          <p class="font-bold text-zinc-300">Ваш кошик порожній</p>
+          <p class="text-xs text-zinc-500 mt-1">Оберіть потрібні товари в каталозі</p>
+        </div>
+
+        <!-- Cart Items list -->
+        <div id="cart-items" class="space-y-3"></div>
+      </div>
+
+      <!-- Drawer Footer -->
+      <div id="cart-footer" class="p-6 border-t border-purple-900/30 bg-zinc-950/70 hidden">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-sm text-zinc-400">Разом до оплати:</span>
+          <span id="cart-subtotal" class="text-2xl font-black text-white">0 ₴</span>
+        </div>
+        <button onclick="openCartCheckout()" class="w-full py-3.5 rounded-xl neon-glow-btn text-white font-bold text-sm text-center">
+          Оформити замовлення
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Product Quick-View Modal -->
+  <div id="product-modal" class="modal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="modal-container w-full max-w-2xl bg-[#110b20] border border-purple-500/40 rounded-3xl shadow-2xl relative overflow-hidden">
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-zinc-900/80 border border-purple-500/30 text-zinc-400 hover:text-white flex items-center justify-center text-sm">
+        ✕
+      </button>
+      <div id="product-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkout-modal" class="modal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="modal-container w-full max-w-lg bg-[#110b20] border border-purple-500/40 rounded-3xl shadow-2xl relative overflow-hidden p-6 sm:p-8">
+      
+      <div class="flex items-center justify-between mb-6 pb-4 border-b border-purple-900/30">
+        <div>
+          <span class="text-purple-400 text-xs font-bold uppercase tracking-wider">Швидке оформлення</span>
+          <h3 class="text-xl font-black text-white">Оформлення замовлення</h3>
+        </div>
+        <button onclick="closeCheckoutModal()" class="w-8 h-8 rounded-full bg-zinc-900 text-zinc-400 hover:text-white flex items-center justify-center text-sm">
+          ✕
+        </button>
+      </div>
+
+      <!-- Order items summary mini -->
+      <div class="bg-zinc-950/80 rounded-xl p-3.5 mb-6 border border-purple-900/30">
+        <div class="text-[11px] font-bold text-purple-300 uppercase tracking-wider mb-2">Товари у замовленні:</div>
+        <div id="checkout-items-summary" class="max-h-32 overflow-y-auto space-y-1 mb-2"></div>
+        <div class="flex items-center justify-between pt-2 border-t border-purple-900/40 text-xs">
+          <span class="text-zinc-400 font-medium">Сума:</span>
+          <span id="checkout-total-amount" class="text-base font-black text-white">0 ₴</span>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <form id="checkout-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 mb-1">Ваше ім'я та прізвище *</label>
+          <input type="text" name="customerName" required placeholder="Наприклад: Олексій Шевченко" class="w-full bg-zinc-950 border border-purple-900/40 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 mb-1">Номер телефону *</label>
+            <input type="tel" name="customerPhone" required placeholder="+38 (0__) ___-__-__" class="w-full bg-zinc-950 border border-purple-900/40 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-zinc-300 mb-1">Місто доставки *</label>
+            <input type="text" name="customerCity" required placeholder="Київ / Львів / Одеса..." class="w-full bg-zinc-950 border border-purple-900/40 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 mb-1">Відділення або поштомат Нової Пошти *</label>
+          <input type="text" name="customerPost" required placeholder="Відділення №12 або Поштомат №5421" class="w-full bg-zinc-950 border border-purple-900/40 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-zinc-300 mb-1">Спосіб оплати *</label>
+          <select name="customerPayment" class="w-full bg-zinc-950 border border-purple-900/40 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
+            <option value="cod">Накладений платіж (при отриманні на пошті)</option>
+            <option value="card">Оплата на карту / IBAN (без комісії за переказ)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 mt-2 rounded-xl neon-glow-btn text-white text-sm font-black text-center shadow-lg shadow-purple-900/50">
+          Підтвердити замовлення
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Success Confirmation Modal -->
+  <div id="success-modal" class="modal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="modal-container w-full max-w-md bg-[#110b20] border border-purple-500/50 rounded-3xl p-8 text-center relative shadow-2xl">
+      <div class="w-16 h-16 rounded-full bg-purple-600/20 border-2 border-purple-400 text-purple-300 flex items-center justify-center mx-auto mb-4 text-2xl font-black">
+        ✓
+      </div>
+      <h3 class="text-2xl font-black text-white mb-1">Дякуємо за замовлення!</h3>
+      <p class="text-xs text-purple-400 font-bold mb-4" id="success-order-id">#TIM-123456</p>
+
+      <p class="text-xs text-zinc-400 mb-6">
+        Ваше замовлення прийнято! Менеджер timstore зв'яжеться з вами за номером <span class="text-white font-bold">+380938530629</span> або в Telegram <span class="text-purple-400 font-bold">@timstore16</span>.
+      </p>
+
+      <div id="success-order-details" class="bg-zinc-950 p-4 rounded-xl border border-purple-900/30 text-left mb-6"></div>
+
+      <button onclick="closeSuccessModal()" class="w-full py-3 rounded-xl neon-glow-btn text-white font-bold text-xs">
+        Повернутися до магазину
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Floating -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-purple-950/95 border border-purple-500/60 text-white px-5 py-3 rounded-2xl shadow-2xl shadow-purple-950 flex items-center gap-3 opacity-0 translate-y-4 pointer-events-none transition-all duration-300 backdrop-blur-md">
+    <div class="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-xs font-black">✓</div>
+    <span id="toast-message" class="text-xs font-semibold">Товар додано до кошика!</span>
+  </div>
+
+  <!-- Custom Logic Script -->
+  <script src="app.js"></script>
+</body>
+</html>
