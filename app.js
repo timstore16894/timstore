@@ -10,7 +10,7 @@ const PRODUCTS = [
     title: "Тримач для телефону на шолом",
     category: "mounts",
     categoryName: "Кріплення & Екшн",
-    price: 230,
+    price: 180,
     oldPrice: 320,
     badge: "ХІТ ПРОДАЖУ",
     badgeColor: "purple",
